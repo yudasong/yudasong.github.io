@@ -29,7 +29,7 @@
       <nobr>2 Cornell University</nobr> <br>
       <nobr>3 Microsoft Research</nobr> <br>
       <br>
-      <font size="4">  <a>Paper </a> &nbsp&nbsp&nbsp&nbsp<a href="https://github.com/yudasong/policy_adaptation"> [Code]</a>  </font>
+      <font size="4">  <a>[Paper] </a> &nbsp&nbsp&nbsp&nbsp<a href="https://github.com/yudasong/policy_adaptation"> [Code]</a> &nbsp&nbsp&nbsp&nbsp  <a>[Video] </a>  </font>
       <br>
   </center>
   <div style="clear:both;"></div>
@@ -37,100 +37,26 @@
 
 <div class="sechighlight">
 <div class="container sec">
-  <h2>Abstract</h2>
+  <center><h2>Abstract</h2></center>
   The high sample complexity of reinforcement learning challenges its use in practice. A promising approach is to quickly adapt pre-trained policies to new environments. Existing methods for this policy adaptation problem typically rely on domain randomization and meta-learning, by sampling from some distribution of target environments during pre-training, and thus face difficulty on out-of-distribution target environments. We propose new model-based mechanisms that are able to make online adaptation in unseen target environments, by combining ideas from no-regret online learning and adaptive control. We prove that the approach learns policies in the target environment that can quickly recover trajectories from the source environment, and establish the rate of convergence in general settings. We demonstrate the benefits of our approach for policy adaptation in a diverse set of continuous control tasks, achieving the performance of state-of-the-art methods with much lower sample complexity.
 </div>
 </div>
 
 <div class="container sec">
-    <div class='row'>
-        <div class='col-xs-6'>
-        <h2>Overall algorithm: </h2>
-        </div>
-        <div class='col-xs-6'>
-            <h2>Humanoid balance with learned controller: </h2>
-            </div>
-    </div>
-
-    <div class='row'>
-        <div class='col-xs-6'>
-        <img style="width: 100%; height: 100%" src='img/2019.png'>
-            </div>
-            <div class='col-xs-6'>
-<!--                    <iframe width="560" height="315" src="img/3-link-balancing.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen> </iframe>-->
-            <div class="headerVideo embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="img/3-link-balancing.mp4" allowfullscreen></iframe>
-            </div>
-            </div>
-                </div>
-
-    </div>
+    <h2>Why adaptation? </h2>
+    <img style="width: 100%" src='img/intro.png'>
+</div>
+<div class="container sec">
+    <h2>Overall Algorithm </h2>
+    <center>
+    <img style="width: 60%" src='img/algo.png'>
+  </center>
 </div>
 
-<div class='row text-center' style='color:#8b8472'>
-    <strong>Published in NeurIPS 2019</strong> <a href="paper/Neural_Lyapunov_Control.pdf " target="_blank">[Paper]</a> <a href="paper/Neural_Lyapunov_Control_Appendix.pdf" target="_blank">[Appendices]</a> <a href="https://github.com/YaChienChang/Neural-Lyapunov-Control" target="_blank">[Code]</a>
-</div>
 
 <div class="container sec">
     <h2>Example Results: </h2>
-    <div class='row'>
-       <div class='col-xs-6'>
-           <h3>Inverted pendulum: </h3>
-
-               <div class='row'>
-                 <div class='col-xs-6'>
-                   <img style="width: 100%; height: 100%" src='img/IP_V.png'>
-                 </div>
-
-                 <div class='col-xs-6'>
-                   <img style="width: 120%; height: 120%" src='img/IP_R.png'>
-                 </div>
-               </div>
-        </div>
-      <div class='col-xs-6'>
-          <h3>Path tracking: </h3>
-
-          <div class='row'>
-              <div class='col-xs-6'>
-                  <img style="width: 100%; height: 100%" src='img/Path_V.png'>
-                      </div>
-
-              <div class='col-xs-6'>
-                  <img style="width: 120%; height: 120%" src='img/Path_R.png'>
-                      </div>
-          </div>
-         </div>
-        </div>
-    <div class='row'>
-        <div class='col-xs-6'>
-            <h3>Caltech ducted fan in hover mode: </h3>
-
-            <div class='row'>
-                <div class='col-xs-6'>
-                    <img style="width: 100%; height: 100%" src='img/Fan_V.png'>
-                        </div>
-
-                <div class='col-xs-6'>
-                    <img style="width: 120%; height: 120%" src='img/Fan_R.png'>
-                        </div>
-            </div>
-        </div>
-        <div class='col-xs-6'>
-            <h3>Humanoid balance: </h3>
-
-            <div class='row'>
-                <div class='col-xs-6'>
-                    <img style="width: 100%; height: 100%" src='img/Acro_V.png'>
-                        </div>
-
-                <div class='col-xs-6'>
-                    <img style="width: 120%; height: 120%" src='img/Acro_R.png'>
-                        </div>
-            </div>
-        </div>
-    </div>
-</div>
-    </div>
+    <img style="width: 100%" src='img/results.png'>
 </div>
 
 <div class="sechighlight">
@@ -139,10 +65,7 @@
       <h2>Bibtex</h2>
 <pre style="font-size:11px; background-color: #E5E3DD">
 @inproceedings{
-    title={Neural Lyapunov Control},
-    author={Ya-Chien Chang, Nima Roohi, and Sicun Gao},
-    booktitle={NeurIPS},
-    year={2019}
+
 }
 </pre>
     </div>
