@@ -38,7 +38,7 @@
       <nobr>2 Cornell University</nobr> <br>
       <nobr>3 Microsoft Research</nobr> <br>
       <br>
-      <font size="4">  <a>[Paper]</a> &nbsp&nbsp&nbsp&nbsp<a href="https://github.com/yudasong/policy_adapt">[Code]</a> &nbsp&nbsp&nbsp&nbsp  <a>[Video]</a>  </font>
+      <font size="4">  <a href="https://arxiv.org/pdf/2006.08051.pdf">[Paper]</a> &nbsp&nbsp&nbsp&nbsp<a href="https://github.com/yudasong/policy_adapt">[Code]</a> &nbsp&nbsp&nbsp&nbsp  <a>[Video]</a>  &nbsp&nbsp&nbsp&nbsp<a href="slides.pdf">[Slides]</a> </font>
       <br>
   </center>
   <div style="clear:both;"></div>
@@ -53,19 +53,90 @@
 
 <div class="container sec">
     <h2>Why adaptation? </h2>
-    <img style="width: 100%" src='img/intro.png'>
+    <div class='row'>
+      <div style="margin-top: 20px" class='col-xs-3'>
+    It is easy to train a good policy in an environment that we have control on. But what if our ultimate goal is to have a good policy that
+    works on another environment that we have very limited knowledge of? In most of the time, directly deploying the policy in hand to an unknown
+    environment will result in failure - reinforcement learning algorithms are not that robust. This is why we need an extra step to adapt the policy
+    to the other environment.
+      </div>
+      <div class='col-xs-9'>
+        <img style="width: 100%" src='img/intro.png'>
+      </div>
+    </div>
 </div>
 <div class="container sec">
-    <h2>Overall Algorithm </h2>
-    <center>
-    <img style="width: 60%" src='img/algo.png'>
-  </center>
+    <h2>Overall Algorithm: </h2>
+    <div class='row'>
+      <div class='col-xs-8'>
+        <center>
+      <img style="width: 80%" src='img/algo.png'>
+    </center>
+      </div>
+      <div style="margin-top: 20px" class='col-xs-4'>
+    One way to ensure the performance of the adapted policy is to make it recover the source policy's trajectories. To do this, we
+    realize that it suffices to learn the transitional dynamics of the environment that we are not familiar with. We propose a method
+    that utilize the Data Aggregation scheme and we prove the rate of convergence of our algorithm. In practice, we train a neural network
+    that predict the deviation between the two environments and use cross entropy method to find the action that minimizes the deviation.
+      </div>
+
 </div>
+
+
+
+
+
 
 
 <div class="container sec">
     <h2>Example Results: </h2>
-    <img style="width: 100%" src='img/results.png'>
+
+
+    <div class='row'>
+        <div class='col-xs-4'>
+        <h3>Original policy </h3>
+        </div>
+        <div class='col-xs-4'>
+            <h3>Directly deploy the original policy </h3>
+            </div>
+        <div class='col-xs-4'>
+            <h3>Adapted policy </h3>
+        </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-xs-4'>
+<!--                    <iframe width="560" height="315" src="img/3-link-balancing.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen> </iframe>-->
+      <div class="headerVideo embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="img/source_success.mp4" allowfullscreen></iframe>
+      </div>
+      </div>
+      <div class='col-xs-4'>
+<!--                    <iframe width="560" height="315" src="img/3-link-balancing.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen> </iframe>-->
+      <div class="headerVideo embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="img/source_fail.mp4" allowfullscreen></iframe>
+      </div>
+      </div>
+            <div class='col-xs-4'>
+<!--                    <iframe width="560" height="315" src="img/3-link-balancing.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen> </iframe>-->
+            <div class="headerVideo embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="img/target_suc.mp4" allowfullscreen></iframe>
+            </div>
+            </div>
+                </div>
+
+
+    <div style="margin-top: 40px" class='row'>
+      <div style="margin-top: 20px"class='col-xs-3'>
+      We see above that our algorithm achieves successful adaptation. However, since we are adapting in an environment with which interation
+      could be expensive, we need to adapt as efficiently as possible. The learning curves, a comparison with other state-of-the-art
+      policy adaptation methods, verifies the efficiency of our method. Our method can finish the adaptation as fast as within 10 episodes in the
+      unknown environment.
+      </div>
+      <div class='col-xs-9'>
+        <img style="width: 100%" src='img/results.png'>
+      </div>
+    </div>
 </div>
 
 <div class="sechighlight">
