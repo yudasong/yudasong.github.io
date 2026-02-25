@@ -1,407 +1,365 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168693378-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-168693378-1');
   </script>
 
   <title>Yuda Song</title>
-
   <meta name="author" content="Yuda Song">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-
+  <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:63%;vertical-align:middle">
-              <p style="text-align:center">
-                <name>Yuda Song</name>
-              </p>
-              <p>Hi, I am a 4th year PhD student at <a href="https://www.ml.cmu.edu/"> Machine Learning Department,
-                Carnegie Mellon University</a>. I am advise by <a href="http://www.cs.cmu.edu/~aarti"> Aarti Singh</a> and 
-                <a href="http://robotwhisperer.org/"> Drew Bagnell</a>. 
-                I am also closely working with <a href="http://wensun.github.io">Wen Sun</a>. I am partially supported by
-                 <a href="https://www.twosigma.com/academic-partnerships/team-phd-fellowship/">Two Sigma PhD fellowship</a>.
-                <br><br>
-                In the past, I have interned at FAIR Paris (with <a href="https://chercheurs.lille.inria.fr/~munos/">Remi Munos</a>), Amazon NYC (with <a href="https://www.udayaghai.com/">Udaya Ghai</a>       
-                and <a href="http://deanfoster.net/index.pl">Dean Foster</a>), and Microsoft Research NYC (with <a href="https://people.cs.umass.edu/~akshay/">Akshay Krishnamurthy</a>       
-                and <a href="https://dylanfoster.net/">Dylan Foster</a>). 
-                I finished my master degree in MLD, 
-                advised by <a href="http://www.cs.cmu.edu/~kkitani/">Kris Kitani</a>. 
-                I completed my undergraduate at UC San Diego with CS and Math majors and
-                I was advised by <a href="http://scungao.github.io">Sicun Gao</a>.
+  <main class="layout">
 
-              <p> My email is yudas at andrew dot cmu dot edu.
-                
-              </p>
-              <p style="text-align:center">
-                <a href="https://scholar.google.com/citations?user=0QDCG8IAAAAJ&hl=en&authuser=1">Google Scholar</a> &nbsp/&nbsp
-                <a href="CV.pdf">CV</a> &nbsp/&nbsp
-                <a href="https://github.com/yudasong">Github</a> &nbsp/&nbsp
-                <a href="https://twitter.com/yus167">Twitter</a>
-              </p>
-            </td>
-            <td style="padding:2.5%;width:30%;max-width:30%">
-              <a href="DSCF1330.jpeg"><img style="width:100%;max-width:100%" alt="profile photo" src="DSCF1330.jpeg" class="hoverZoomLink"></a>
-            </td>
-          </tr>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <heading>Research</heading>
-              <p>
-                I am interested in the theory, science and application of interactive decision-making. 
-                My current study focuses on when and how we can achieve efficient and robust learning, from thinking about the three foundations of interactive decision-making: data, environment and interaction protocol. I am also interested in the application of principled decision-making algorithms in large-scale real-world applications, such as generative models and robotics. 
-            </td>
-          </tr>
-        
-        </tbody></table>
+    <aside class="sidebar">
+      <div class="sidebar__inner">
+        <a href="DSCF1330.jpeg"><img class="sidebar__photo" src="DSCF1330.jpeg" alt="Profile photo of Yuda Song"></a>
+        <h1 class="sidebar__name">Yuda Song</h1>
+        <p class="sidebar__email">yudas at andrew dot cmu dot edu</p>
+        <nav class="sidebar__links">
+          <a href="https://scholar.google.com/citations?user=0QDCG8IAAAAJ&hl=en&authuser=1">Google Scholar</a>
+          <a href="CV.pdf">CV</a>
+          <a href="https://github.com/yudasong">Github</a>
+          <a href="https://twitter.com/yus167">Twitter</a>
+        </nav>
+        <nav class="sidebar__nav">
+          <a href="#research" class="sidebar__nav-link">Research</a>
+          <a href="#publications" class="sidebar__nav-link">Publications</a>
+          <a href="#talks" class="sidebar__nav-link">Talks</a>
+          <a href="#teaching-service" class="sidebar__nav-link">Teaching &amp; Service</a>
+        </nav>
+      </div>
+    </aside>
 
-        <!-- <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-          <td style="padding:20px;width:100%;vertical-align:middle">
-            <heading>Preprints</heading>
-            <table width="100%" align="center" border="0" cellpadding="20"><tbody>
-          
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle"><img src="img/reptransfer.png" width="100%"></td>
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2205.14571">Provable Benefits of Representational Transfer in Reinforcement Learning </a>
-              <br>
-              (alphabetical order) Alekh Agarwal, <strong>Yuda Song</strong>, Wen Sun, Kaiwen Wang, Mengdi Wang, Xuezhou Zhang
-              <br><br>
-                [<a href="https://github.com/yudasong/briee/tree/reptransfer">code</a>]
-              </td>
-            </td>
-          </tr> 
+    <div class="content">
 
-        </tbody></table>
-            </td>
-          </tr>
-        </tbody></table> -->
+      <section class="section" id="about">
+        <p>
+          Hi, I am a 4th year PhD candidate at <a href="https://www.ml.cmu.edu/">Machine Learning Department,
+          Carnegie Mellon University</a>. I am advised by <a href="http://www.cs.cmu.edu/~aarti">Aarti Singh</a> and
+          <a href="http://robotwhisperer.org/">Drew Bagnell</a>.
+          I am also closely working with <a href="http://wensun.github.io">Wen Sun</a>. I am partially supported by
+          <a href="https://www.twosigma.com/academic-partnerships/team-phd-fellowship/">Two Sigma PhD fellowship</a>.
+        </p>
+        <p>
+          In the past, I have interned at FAIR Paris (with <a href="https://chercheurs.lille.inria.fr/~munos/">Remi Munos</a>),
+          Amazon NYC (with <a href="https://www.udayaghai.com/">Udaya Ghai</a>
+          and <a href="http://deanfoster.net/index.pl">Dean Foster</a>),
+          and Microsoft Research NYC (with <a href="https://people.cs.umass.edu/~akshay/">Akshay Krishnamurthy</a>
+          and <a href="https://dylanfoster.net/">Dylan Foster</a>).
+          I finished my master degree in MLD,
+          advised by <a href="http://www.cs.cmu.edu/~kkitani/">Kris Kitani</a>.
+          I completed my undergraduate at UC San Diego with CS and Math majors and
+          I was advised by <a href="http://scungao.github.io">Sicun Gao</a>.
+        </p>
+      </section>
 
-        <!-- <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td width="100%" valign="middle">
-              <heading>Preprint</heading>
-            </td>
-          </tr>
-        </table> -->
+      <section class="section" id="research">
+      <h2 class="section__title">Research</h2>
+      <p>
+        I am interested in the theory, science and application of interactive decision-making.
+        My current study focuses on when and how we can achieve efficient and robust learning, from thinking about the two foundations of interactive decision-making: the environment (structure, data) and the policy (nowadays with foundation models). I am also interested in the application of principled decision-making algorithms in large-scale real-world applications, such as generative models and robotics.
+      </p>
+    </section>
+
+    <section class="section show-selected" id="publications">
+      <h2 class="section__title paper-toggle">
+        <button class="paper-toggle__btn paper-toggle__btn--active" onclick="showSelected()">Selected Papers</button>
+        <span class="paper-toggle__sep">/</span>
+        <button class="paper-toggle__btn" onclick="showAll()">Show All</button>
+      </h2>
+
+      <article class="paper paper--selected">
+        <a class="paper__title" href="https://arxiv.org/abs/2602.02482"><strong>Expanding the Capabilities of Reinforcement Learning via Text Feedback</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>*, Lili Chen*, Fahim Tajwar, Remi Munos, Deepak Pathak, J. Andrew Bagnell, Aarti Singh, Andrea Zanette</div>
+        <div class="paper__venue"><em>arXiv</em>, 2026</div>
+        <!-- <div class="paper__description">
+          We study the algorithmic trade-off between expert distillation and end-to-end RL in POMDPs, where the empirical results on visual based robotics locomotion tasks corrobate our theoretical findings. 
+        </div> -->
+      </article>
+
+      <article class="paper paper--selected">
+        <a class="paper__title" href="https://arxiv.org/abs/2602.02710"><strong>Maximum Likelihood Reinforcement Learning</strong></a>
+        <div class="paper__authors">Fahim Tajwar, Guanning Zeng, Yueer Zhou, <strong>Yuda Song</strong>, Daman Arora, Yiding Jiang, Jeff Schneider, Ruslan Salakhutdinov, Haiwen Feng, Andrea Zanette</div>
+        <div class="paper__venue"><em>arXiv</em>, 2026</div>
+        <!-- <div class="paper__description">
+          We study the algorithmic trade-off between expert distillation and end-to-end RL in POMDPs, where the empirical results on visual based robotics locomotion tasks corrobate our theoretical findings. 
+        </div> -->
+      </article>
 
 
-        <!-- <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2412.02674"><b>Mind the Gap: Examining the Self-Improvement Capabilities of Large Language Models </b> </a>
-              <br>
-              <strong>Yuda Song</strong>, Hanlin Zhang, Udaya Ghai, Carson Eisenach, Sham M. Kakade, Dean Foster
-              <br>
-              <em>NeurIPS Workshop on Mathematics of Modern Machine Learning</em>, 2024
-            </td>
-            </td>
-          </tr> -->
-        
+      <article class="paper paper--selected">
+        <a class="paper__title" href="https://arxiv.org/abs/2510.03207"><strong>To Distill or Decide? Understanding the Algorithmic Trade-off in Partially Observable Reinforcement Learning</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>, Dhruv Rohatgi, Aarti Singh, J Andrew Bagnell</div>
+        <div class="paper__venue"><em>NeurIPS</em>, 2025</div>
+        <div class="paper__description">
+          We study the algorithmic trade-off between expert distillation and end-to-end RL in POMDPs, where the empirical results on visual based robotics locomotion tasks corrobate our theoretical findings. 
+        </div>
+      </article>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td width="100%" valign="middle">
-              <heading>Publications</heading>
-            </td>
-          </tr>
-        </table>
+      <article class="paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2509.06941"><strong>Outcome-based Exploration for LLM Reasoning</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>, Julia Kempe, Remi Munos</div>
+        <div class="paper__venue"><em>NeurIPS ARLET workshop</em>, 2025</div>
+      </article>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2510.03207"><b>To Distill or Decide? Understanding the Algorithmic Trade-off in Partially Observable Reinforcement Learning</b> </a>
-              <br>
-              <strong>Yuda Song</strong>, Dhruv Rohatgi, Aarti Singh, J Andrew Bagnell
-              <br>
-              <em>Neurips</em>, 2025
-            </td>
-            </td>
-          </tr>
+      <article class="paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2502.10563"><strong>Accelerating Unbiased LLM Evaluation via Synthetic Feedback</strong></a>
+        <div class="paper__authors">Zhaoyi Zhou, <strong>Yuda Song</strong>, Andrea Zanette</div>
+        <div class="paper__venue"><em>ICML</em>, 2025</div>
+      </article>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2509.06941"><b>Outcome-based Exploration for LLM Reasoning</b> </a>
-              <br>
-              <strong>Yuda Song</strong>, Julia Kempe, Remi Munos
-              <br>
-              <em>Neurips ARLET workshop</em>, 2025
-            </td>
-            </td>
-          </tr>
+      <article class="paper paper--selected">
+        <a class="paper__title" href="https://arxiv.org/abs/2412.02674"><strong>Mind the Gap: Examining the Self-Improvement Capabilities of Large Language Models</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>, Hanlin Zhang, Udaya Ghai, Carson Eisenach, Sham M. Kakade, Dean Foster</div>
+        <div class="paper__venue"><em>ICLR</em>, 2025</div>
+        <div class="paper__description">
+        Through a large scale scientific study, we find 1) a scaling law of LLM self-improvement, 2) a loss of coverage through LLM post-training, 3) test-time scaling through self-improvement and many other interesting phenomena.
+        </div>
+      </article>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2502.10563"><b>Accelerating Unbiased LLM Evaluation via Synthetic Feedback</b> </a>
-              <br>
-              Zhaoyi Zhou, <strong>Yuda Song</strong>, Andrea Zanette
-              <br>
-              <em>ICML</em>, 2025
-            </td>
-            </td>
-          </tr>
+      <article class="paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2406.01462"><strong>The Importance of Online Data: Understanding Preference Fine-Tuning Through the Lens of Coverage</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>, Gokul Swamy, Aarti Singh, J. Andrew Bagnell, Wen Sun</div>
+        <div class="paper__venue"><em>NeurIPS</em>, 2024</div>
+        <div class="paper__description">
+          We prove that offline contrastive-based method (e.g., DPO)
+          requires a stronger coverage property than online RL-based method (e.g., RLHF). We propose
+          Hybrid Preference Optimization to combine the benefits of both offline and online methods.
+        </div>
+      </article>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2412.02674"><b>Mind the Gap: Examining the Self-Improvement Capabilities of Large Language Models </b> </a>
-              <br>
-              <strong>Yuda Song</strong>, Hanlin Zhang, Udaya Ghai, Carson Eisenach, Sham M. Kakade, Dean Foster
-              <br>
-              <em>ICLR</em>, 2025
-            </td>
-            </td>
-          </tr>
+      <article class="paper paper--selected">
+        <a class="paper__title" href="http://arxiv.org/abs/2406.07253"><strong>Hybrid Reinforcement Learning from Offline Observation Alone</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>, J. Andrew Bagnell, Aarti Singh</div>
+        <div class="paper__venue"><em>ICML</em>, 2024</div>
+        <div class="paper__description">
+          We consider a practical setting of hybrid RL where the agent only has access to offline observation data without action labels (e.g., videos of human demonstrations), and we show that it is possible to achieve efficient learning in this setting with a practical algorithm.
+        </div>
+      </article>
 
+      <article class="paper paper--selected">
+        <a class="paper__title" href="https://arxiv.org/abs/2405.19269"><strong>Rich-Observation Reinforcement Learning with Continuous Latent Dynamics</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>, Lili Wu, Dylan J. Foster, Akshay Krishnamurthy</div>
+        <div class="paper__venue"><em>ICML</em>, 2024</div>
+        <div class="paper__description">
+          We introduce a new theoretical framework, RichCLD, in which the agent performs control based on high-dimensional observations, but the environment is governed by low-dimensional latent states and Lipschitz continuous dynamics.
+        </div>
+      </article>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-        <tr>
-          <td width="75%" valign="center">
-            <a href="https://arxiv.org/abs/2406.01462"><b>The Importance of Online Data: Understanding Preference Fine-Tuning Through the Lens of Coverage</b> </a>
-            <br>
-            <strong>Yuda Song</strong>, Gokul Swamy, Aarti Singh, J. Andrew Bagnell, Wen Sun
-            <br>
-            <em>NeurIPS</em>, 2024.
-            <br><br>
-            We prove that offline contrastive-based method (e.g., DPO)
-            requires a stronger coverage property than online RL-based method (e.g., RLHF). We propose 
-            Hybrid Preference Optimization to combine the benefits of both offline and online methods.
-        </td>
-          </td>
-        </tr>
+      <article class="paper paper--selected">
+        <a class="paper__title" href="https://arxiv.org/abs/2205.14571"><strong>Provable Benefits of Representational Transfer in Reinforcement Learning</strong></a>
+        <div class="paper__authors">(alphabetical order) Alekh Agarwal, <strong>Yuda Song</strong>, Wen Sun, Kaiwen Wang, Mengdi Wang, Xuezhou Zhang</div>
+        <div class="paper__venue"><em>COLT</em>, 2023</div>
+        <div class="paper__links">[<a href="https://github.com/yudasong/briee/tree/reptransfer">code</a>]</div>
+        <div class="paper__description">
+          We prove the benefit of representation learning on diverse source environments which allows efficient learning on the
+          source environment with the learned representation under the low-rank MDPs setting.
+        </div>
+      </article>
 
+      <article class="paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2303.00694"><strong>The Virtues of Laziness in Model-based RL: A Unified Objective and Algorithms</strong></a>
+        <div class="paper__authors">Anirudh Vemula, <strong>Yuda Song</strong>, Aarti Singh, J. Andrew Bagnell, Sanjiban Choudhury</div>
+        <div class="paper__venue"><em>ICML</em>, 2023</div>
+        <div class="paper__links">[<a href="https://github.com/vvanirudh/LAMPS-MBRL">code</a>]</div>
+      </article>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td width="75%" valign="center">
-              <a href="http://arxiv.org/abs/2406.07253"><b>Hybrid Reinforcement Learning from Offline Observation Alone</b> </a>
-              <br>
-              <strong>Yuda Song</strong>, J. Andrew Bagnell, Aarti Singh
-              <br>
-              <em>ICML</em>, 2024.
-            </td>
-            </td>
-          </tr>
+      <article class="paper paper--selected">
+        <a class="paper__title" href="https://arxiv.org/abs/2210.06718"><strong>Hybrid RL: Using Both Offline and Online Data Can Make RL Efficient</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>*, Yifei Zhou*, Ayush Sekhari, J. Andrew Bagnell, Akshay Krishnamurthy, Wen Sun</div>
+        <div class="paper__venue"><em>ICLR</em>, 2023</div>
+        <div class="paper__links">
+          [<a href="https://github.com/yudasong/HyQ">code</a>]
+          [<a href="https://youtu.be/p5jzEsorsCs?si=ULBxfZKWoP07Qtvp">Talk at RL theory seminars</a>]
+        </div>
+        <div class="paper__description">
+          Combining online data and offline data can solve RL with both statistical and computation efficiency.
+      </article>
 
-          <tr>
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2405.19269"><b>Rich-Observation Reinforcement Learning with Continuous Latent Dynamics</b> </a>
-              <br>
-              <strong>Yuda Song</strong>, Lili Wu, Dylan J. Foster, Akshay Krishnamurthy
-              <br>
-              <em>ICML</em>, 2024.
-              <br><br>
-              We introduce a new theoretical framework, RichCLD (Rich-Observation RL with Continuous Latent Dynamics), in which the agent performs control based on high-dimensional observations, but the environment is governed by low-dimensional latent states and Lipschitz continuous dynamics.
-            </td>
-            </td>
-          </tr>
+      <article class="paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2210.16976"><strong>Representation Learning for General-sum Low-rank Markov Games</strong></a>
+        <div class="paper__authors">Chengzhuo Ni, <strong>Yuda Song</strong>, Xuezhou Zhang, Chi Jin, Mengdi Wang</div>
+        <div class="paper__venue"><em>ICLR</em>, 2023</div>
+      </article>
 
-          <tr>
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2205.14571"><b>Provable Benefits of Representational Transfer in Reinforcement Learning</b> </a>
-              <br>
-              (alphabetical order) Alekh Agarwal, <strong>Yuda Song</strong>, Wen Sun, Kaiwen Wang, Mengdi Wang, Xuezhou Zhang
-              <br>
-              <em>COLT</em>, 2023.
-              <br>
-                [<a href="https://github.com/yudasong/briee/tree/reptransfer">code</a>]
-              <br><br>
-              We prove the benefit of representation learning on diverse source environments which allows efficient learning on the 
-              source environment with the learned representation under the low-rank MDPs setting.
-            </td>
-            </td>
-          </tr>
+      <article class="paper paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2202.00063"><strong>Efficient Reinforcement Learning in Block MDPs: A Model-free Representation Learning Approach</strong></a>
+        <div class="paper__authors">Xuezhou Zhang, <strong>Yuda Song</strong>, Masatoshi Uehara, Mengdi Wang, Alekh Agarwal, Wen Sun</div>
+        <div class="paper__venue"><em>ICML</em>, 2022</div>
+        <div class="paper__links">
+          [<a href="https://github.com/yudasong/briee">code</a>]
+          [<a href="https://youtu.be/yNFXYmbwWNg?si=T0M-hW_-6d5f-fCV">Talk at RL theory seminars</a>]
+        </div>
+        <div class="paper__description">
+          An efficient rich-observation RL algorithm that learns to decode from rich observations to latent states
+          (via adversarial training), while balancing exploration and exploitation.
+        </div>
+      </article>
 
-          <tr>
-            <!--<td style="padding:20px;width:25%;vertical-align:middle"><img src="img/hyq.png" width="100%"></td>-->
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2303.00694"><b>The Virtues of Laziness in Model-based RL: A Unified Objective and Algorithms</b> </a>
-              <br>
-              Anirudh Vemula, <strong>Yuda Song</strong>,  Aarti Singh, J. Andrew Bagnell, Sanjiban Choudhury
-              <br>
-              <em>ICML</em>, 2023.
-              <br>
-                [<a href="https://github.com/vvanirudh/LAMPS-MBRL">code</a>]
-              </td>        
-            </td>
-          </tr>
-          
-          <tr>
-            <!--<td style="padding:20px;width:25%;vertical-align:middle"><img src="img/hyq.png" width="100%"></td>-->
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2210.06718"><b>Hybrid RL: Using Both Offline and Online Data Can Make RL Efficient</b> </a>
-              <br>
-              <strong>Yuda Song</strong>*, Yifei Zhou*, Ayush Sekhari, J. Andrew Bagnell, Akshay Krishnamurthy, Wen Sun
-              <br>
-              <em>ICLR</em>, 2023.
-              <br>
-                [<a href="https://github.com/yudasong/HyQ">code</a>]
-                [<a href="https://youtu.be/p5jzEsorsCs?si=ULBxfZKWoP07Qtvp">Talk at RL theory seminars</a>]
-              <br><br>
-              Combining online data and offline data can solve RL with both statistical and computation efficiency. 
-              Experiments on Montezuma's Revenge reveals that hybrid RL works much better 
-              than pure online RL and pure offline RL.
-              </td>        
-            </td>
-          </tr>
+      <article class="paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2204.01925"><strong>No-regret Model-Based Meta RL for Personalized Navigation</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>, Ye Yuan, Wen Sun, Kris Kitani</div>
+        <div class="paper__venue"><em>L4DC</em>, 2022</div>
+      </article>
 
-          <tr>
-            <!--<td style="padding:20px;width:25%;vertical-align:middle"></td>-->
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2210.16976"><b>Representation Learning for General-sum Low-rank Markov Games</b></a>
-              <br>
-              Chengzhuo Ni, <strong>Yuda Song</strong>, Xuezhou Zhang, Chi Jin, Mengdi Wang
-              <br>
-              <em>ICLR</em>, 2023.
-              <br>
-              </td>
-            </td>
-          </tr>
+      <article class="paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2110.03659"><strong>Transform2Act: Learning a Transform-and-Control Policy for Efficient Agent Design</strong></a>
+        <div class="paper__authors">Ye Yuan, <strong>Yuda Song</strong>, Zhengyi Luo, Wen Sun, Kris Kitani</div>
+        <div class="paper__venue"><em>ICLR</em>, 2022</div>
+        <div class="paper__links">[<a href="https://sites.google.com/view/transform2act">Project Page</a>]</div>
+      </article>
 
-          <tr>
-            <!--<td style="padding:20px;width:25%;vertical-align:middle"><img src="img/comblock.png" width="100%"></td>-->
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2202.00063"> <b> Efficient Reinforcement Learning in Block MDPs: A Model-free Representation Learning Approach</b></a>
-              <br>
-              Xuezhou Zhang, <strong>Yuda Song</strong>, Masatoshi Uehara, Mengdi Wang, Alekh Agarwal, Wen Sun
-              <br>
-              <em>ICML</em>, 2022.
-              <br>
-                [<a href="https://github.com/yudasong/briee">code</a>]
-                [<a href="https://youtu.be/yNFXYmbwWNg?si=T0M-hW_-6d5f-fCV">Talk at RL theory seminars</a>]
-              <br><br>
-              An efficient rich-observation RL algorithm that learns to decode from rich observations to latent states 
-              (via adversarial training), while balancing exploration and exploitation.
-              </td>
-            </td>
-          </tr>
-          
-          <tr>
-            <!--td style="padding:20px;width:25%;vertical-align:middle"></td> -->
-            <td width="75%" valign="center">
-              <a href="https://yudasong.github.io/papers/personalized.pdf"><b>No-regret Model-Based Meta RL for Personalized Navigation</b> </a>
-              <br>
-              <strong>Yuda Song</strong>, Ye Yuan, Wen Sun, Kris Kitani
-              <br>
-              <em>L4DC</em>, 2022.
-              <br>
-            </td>
-          </tr>
+      <article class="paper paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2107.07410"><strong>PC-MLP: Model-based Reinforcement Learning with Policy Cover Guided Exploration</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>, Wen Sun</div>
+        <div class="paper__venue"><em>ICML</em>, 2021</div>
+        <div class="paper__links">[<a href="https://github.com/yudasong/PCMLP">code</a>]</div>
+        <div class="paper__description">
+          A simple provably efficient model-based algorithm that achieves competitive performance in both dense reward
+          continuous control tasks and sparse reward control tasks that require efficient exploration.
+        </div>
+      </article>
+
+      <article class="paper paper">
+        <a class="paper__title" href="https://arxiv.org/abs/2006.08051"><strong>Provably Efficient Model-based Policy Adaptation</strong></a>
+        <div class="paper__authors"><strong>Yuda Song</strong>, Aditi Mavalankar, Wen Sun, Sicun Gao</div>
+        <div class="paper__venue"><em>ICML</em>, 2020</div>
+        <div class="paper__links">
+          [<a href="https://yudasong.github.io/PADA">Project Page</a>]
+          [<a href="https://github.com/yudasong/policy_adapt">code</a>]
+        </div>
+        <div class="paper__description">
+          We study Sim-to-Real/policy transfer/policy adaptation under a model-based framework
+          resulting an algorithm that enjoys strong theoretical guarantees
+          and excellent empirical performance.
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="talks">
+      <h2 class="section__title">Talks</h2>
+
+      <div class="talk">
+        <div class="talk__topic"><strong>Rethinking the Foundation of LLM Post-Training: Signal and Objective</strong></div>
+        <ul class="talk__events">
+          <li>Frontiers in Online Reinforcement Learning Workshop, March 2026.</li>
+          <li>Stanford, March 2026.</li>
+          <li>Harvard ML Foundations Group, February 2026.</li>
+        </ul>
+      </div>
 
 
-          <tr>
-            <!--<td style="padding:20px;width:25%;vertical-align:middle"><img src="img/T2A.png" width="100%"></td>-->
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2110.03659"><b>Transform2Act: Learning a Transform-and-Control Policy for Efficient Agent Design</b></a>
-              <br>
-              Ye Yuan, <strong>Yuda Song</strong>, Zhengyi Luo, Wen Sun, Kris Kitani
-              <br>
-              <em>ICLR</em>, 2022. <!--<strong style="color:red;">Oral presentation</strong>-->
-              <br>
-              [<a href="https://sites.google.com/view/transform2act">Project Page</a>]
-            </td>
-          </tr>
+      <div class="talk">
+        <div class="talk__topic"><strong>Harnessing Additional Feedback in LLM Post-Training</strong></div>
+        <ul class="talk__events">
+          <li>CMU Goomba Lab, October 2025. [<a href="slides/feedback.pdf">Slides</a>]</li>
+          <li>FAIR Paris, July 2025.</li>
+        </ul>
+      </div>
 
-          <tr>
-            <!--<td style="padding:20px;width:25%;vertical-align:middle"><img src="img/PCMLP.png" width="100%"></td>-->
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2107.07410"><b>PC-MLP: Model-based Reinforcement Learning with Policy Cover Guided Exploration</b></a>
-              <br>
-              <strong>Yuda Song</strong>, Wen Sun
-              <br>
-              <em>ICML</em>, 2021
-              <br>
-              [<a href="https://github.com/yudasong/PCMLP">code</a>]
-              <br><br>
-              A simple provably efficient model-based algorithm that achieves competitive performance in both dense reward 
-              continuous control tasks and sparse reward control tasks that require efficient exploration.
-            </td>
-          </tr>
-          <tr>
-            <!--<td style="padding:20px;width:25%;vertical-align:middle"><img src="img/PADA.png" width="100%"></td>-->
-            <td width="75%" valign="center">
-              <a href="https://arxiv.org/abs/2006.08051"><b>Provably Efficient Model-based Policy Adaptation</b></a>
-              <br>
-              <strong>Yuda Song</strong>, Aditi Mavalankar,
-               Wen Sun, Sicun Gao
-              <br>
-              <em>ICML</em>, 2020
-              <br>
-              [<a href="https://yudasong.github.io/PADA">Project Page</a>]
-              [<a href="https://github.com/yudasong/policy_adapt">code</a>]
-              <br><br>
-              We study Sim-to-Real/policy transfer/policy adaptation under a model-based framework 
-              resulting an algorithm that enjoyes strong theoretical guarantees 
-              and excellent empirical performance.
-            </td>
-          </tr>
+      <div class="talk">
+        <div class="talk__topic"><strong>Hybrid RL: Efficient RL with Both Online and Offline Data</strong></div>
+        <ul class="talk__events">
+          <li>Amazon NYC, July 2024.</li>
+          <li>ISAIM Special Session on Deep Reinforcement Learning: Bridging Theory and Practice, January 2024.</li>
+          <li>RL Theory Seminar, November 2023. [<a href="slides/hyq.pdf">Slides</a>][<a href="https://youtu.be/yNFXYmbwWNg?si=T0M-hW_-6d5f-fCV">Recording</a>]</li>
+        </ul>
+      </div>
+    </section>
 
-        <!-- </tbody></table>
-            </td>
-          </tr>
-        </tbody></table> -->
+    <section class="section" id="teaching-service">
+      <h2 class="section__title">Teaching &amp; Service</h2>
+      <div class="talk">
+        <div class="talk__topic"><strong>Lecturer</strong></div>
+        <ul class="talk__events">
+          <li>CMU 10734: Foundations of Autonomous Decision Making under Uncertainty (Fall 2024, Fall 2025)</li>
+        </ul>
+      </div>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <heading>Teaching Assistant</heading>
-              <p>
-                <li>UCSD CSE291: Topics in Search and Optimization (Winter 2020)
-                <li>UCSD CSE154: Deep Learning (Fall 2019)
-                <li>UCSD CSE150: Introduction to AI: Search and Reasoning (Winter 2019, Spring 2020)
-                <li>UCSD CSE30:  Computer Organization and Systems Programming (Spring 2019, Winter 2018)
-                <li>UCSD CSE11: Introduction to CS & OOP (Fall 2018)
-              </p>
-            </td>
-          </tr>
-        </tbody></table>
+      <div class="talk">
+        <div class="talk__topic"><strong>Guest Lecturer</strong></div>
+        <ul class="talk__events">
+          <li>Cornell CS6789: Foundations of Reinforcement Learning (Fall 2024)</li>
+          <li>CMU 17740: Algorithmic Foundations of Interactive Learning (Fall 2024)</li>
+        </ul>
+      </div>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <heading>Service</heading>
-              <p>
-                <li>Reviewer: ICML (2021-), NeurIPS (2021-), ICLR (2022-), AAAI (2021-2022).
-                <li>Top Reviewer: NeurIPS 2022</li>
-              </p>
-            </td>
-          </tr>
-        </tbody></table>
+      <div class="talk">
+        <div class="talk__topic"><strong>Teaching Assistant</strong></div>
+        <ul class="talk__events">
+          <li>UCSD CSE291: Topics in Search and Optimization (Winter 2020)</li>
+          <li>UCSD CSE154: Deep Learning (Fall 2019)</li>
+          <li>UCSD CSE150: Introduction to AI: Search and Reasoning (Winter 2019, Spring 2020)</li>
+          <li>UCSD CSE30: Computer Organization and Systems Programming (Spring 2019, Winter 2018)</li>
+          <li>UCSD CSE11: Introduction to CS &amp; OOP (Fall 2018)</li>
+        </ul>
+      </div>
 
+      <div class="talk">
+        <div class="talk__topic"><strong>Reviewer</strong></div>
+        <ul class="talk__events">
+          <li>Conference: COLT (2025-), ICML (2021-), NeurIPS (2021-), ALT (2024-), ICLR (2022-), AAAI (2021-2022)</li>
+          <li>Journal: TMLR, JMLR, IEEE Transactions on Signal Processing</li>
+          <li>Outstanding Reviewer: NeurIPS 2022</li>
+        </ul>
+      </div>
+    </section>
 
+      <footer class="footer">
+        <p>Source code from <a href="https://github.com/jonbarron/jonbarron_website">here</a></p>
+      </footer>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-            <td style="padding:0px">
-              <br>
-              <p style="text-align:right;font-size:small;">
-                Source code from <a href="https://github.com/jonbarron/jonbarron_website">here</a>
-              </p>
-            </td>
-          </tr>
-        </tbody></table>
-      </td>
-    </tr>
-  </table>
+    </div>
+  </main>
+
+  <script>
+    function showSelected() {
+      var pub = document.getElementById('publications');
+      var btns = document.querySelectorAll('.paper-toggle__btn');
+      pub.classList.add('show-selected');
+      btns[0].classList.add('paper-toggle__btn--active');
+      btns[1].classList.remove('paper-toggle__btn--active');
+    }
+    function showAll() {
+      var pub = document.getElementById('publications');
+      var btns = document.querySelectorAll('.paper-toggle__btn');
+      pub.classList.remove('show-selected');
+      btns[1].classList.add('paper-toggle__btn--active');
+      btns[0].classList.remove('paper-toggle__btn--active');
+    }
+
+    // Scroll-spy: highlight sidebar nav link for current section
+    (function() {
+      var navLinks = document.querySelectorAll('.sidebar__nav-link');
+      var sections = document.querySelectorAll('.content > .section');
+      if (!sections.length || !navLinks.length) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            navLinks.forEach(function(link) {
+              link.classList.remove('sidebar__nav-link--active');
+            });
+            var activeLink = document.querySelector('.sidebar__nav-link[href="#' + entry.target.id + '"]');
+            if (activeLink) activeLink.classList.add('sidebar__nav-link--active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -60% 0px' });
+
+      sections.forEach(function(section) {
+        observer.observe(section);
+      });
+    })();
+  </script>
 </body>
-
 </html>
