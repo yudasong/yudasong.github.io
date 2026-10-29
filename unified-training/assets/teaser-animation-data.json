@@ -9,5 +9,13 @@
   "unified_configurations": 22,
   "semantics": "Best observed checkpoint at or below compute budget, separately for each method family and metric. Step curves, no performance interpolation. Left schedules are schematic and not a single run underlying these envelopes.",
   "shared_pretraining_animation_fraction": 0.12,
-  "duration_ms": 10000
+  "duration_ms": 10000,
+  "earliest_unified_pre_rl_compute": 14929468941938982912,
+  "earliest_staged_pre_rl_compute": 15208624734484050432,
+  "staged_midtraining_end_animation_fraction": 0.28,
+  "staged_midtraining_anchor_epochs": 1,
+  "timing_source": ".local-artifacts/teaser-reasoning-20261026/teaser_audit.json",
+  "timing_mapping": "Shared pretraining ends at 12% of animation time. The earliest unified pre-RL checkpoint is reached at 23% (left x=235/400); the earliest staged pre-RL checkpoint ends midtraining at 28% (left x=266.667/400). Both panels use one cumulative compute budget, with logarithmic interpolation between these anchors. Left staged phases remain equal width; the brief difference in RL onset is compressed visually. These anchors represent the earliest runs, not every configuration contributing to the envelopes.",
+  "unified_rl_start_animation_fraction": 0.23,
+  "unified_rl_start_schematic_x": 235
 }

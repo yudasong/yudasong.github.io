@@ -127,15 +127,15 @@
                     <rect x="133.333" y="32" width="133.334" height="55" class="data-midtraining"/>
                     <rect x="266.667" y="32" width="133.333" height="55" class="data-rl"/>
                     <path
-                      d="M0 134 H110 C130 134 140 152 160 152 H245 C265 152 275 189 295 189 H0 Z"
+                      d="M0 134 H80 C100 134 110 152 130 152 H235 C255 152 265 189 285 189 H0 Z"
                       class="data-pretraining"
                     />
                     <path
-                      d="M110 134 H400 V147 H295 C275 147 265 152 245 152 H160 C140 152 130 134 110 134 Z"
+                      d="M80 134 H400 V147 H285 C265 147 255 152 235 152 H130 C110 152 100 134 80 134 Z"
                       class="data-midtraining"
                     />
                     <path
-                      d="M245 152 C265 152 275 147 295 147 H400 V189 H295 C275 189 265 152 245 152 Z"
+                      d="M235 152 C255 152 265 147 285 147 H400 V189 H285 C265 189 255 152 235 152 Z"
                       class="data-rl"
                     />
                     <g class="training-band-labels" aria-hidden="true">
@@ -204,11 +204,11 @@
             <figcaption id="training-animation-caption">
               Staged training uses data sources sequentially; unified training allows their distributions to overlap and
               evolve.
-              The left panel illustrates these schedules, with schematic proportions and timing.
+              The left panel illustrates these schedules, with schematic proportions and phase widths.
+              RL begins at the compute budget of the earliest pre-RL evaluation plotted for each method.
               The right panel reports the best observed accuracy (pass@1, solid) and coverage (pass@16, dashed) within
               each total compute budget across a sweep of unified and staged configurations.
-              Compute includes pretraining, midtraining, and RL; the initial pretraining period is compressed in the
-              animation.
+              Compute includes pretraining, midtraining, and RL; animation speed varies across phases for readability.
             </figcaption>
           </figure>
         </div>
@@ -774,7 +774,7 @@
     <script src="assets/vendor/tex-linebreak/hyphens_en-us.js" defer></script>
     <script src="typography.js?v=20261029-full-article" defer></script>
     <script src="site.js" defer></script>
-    <script src="teaser-animation.js?v=20261028b" defer></script>
+    <script src="teaser-animation.js?v=20261029-onset2" defer></script>
     <!-- #endregion -->
   </body>
 </html>

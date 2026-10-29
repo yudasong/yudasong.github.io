@@ -5,10 +5,17 @@
   if (!root) return;
   const NS = 'http://www.w3.org/2000/svg';
   const PRETRAINING = 1.4830489990487605e19;
+  // Earliest pre-RL checkpoints represented by the two method envelopes.
+  // The staged anchor is the one-epoch midtraining configuration.
+  const UNIFIED_RL_START = 1.4929468941938983e19;
+  const STAGED_RL_START = 1.520862473448405e19;
   const MAX_COMPUTE = 2.1533828137184055e19;
   const INTRO_FRACTION = .12;
+  const UNIFIED_RL_FRACTION = .23;
+  const STAGED_RL_FRACTION = .28;
   const DURATION = 10000;
   const FIRST_STAGE_END = 400 / 3;
+  const UNIFIED_RL_X = 235;
   // Coordinates from the unmodified pdftocairo conversion of teaser_reasoning.pdf.
   const PLOT = { left: 33.421875, end: 215.925034, top: 3.972656, bottom: 90.699219 };
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -31,22 +38,44 @@
     return node;
   }
 
+  function logFraction(value, start, end) {
+    return Math.log(value / start) / Math.log(end / start);
+  }
+
+  function timing(value) {
+    const p = Math.max(0, Math.min(1, value));
+    // Allocate readable animation time to each interval. Both panels use the
+    // same compute budget even though time and schematic stage widths differ.
+    const compute = p < INTRO_FRACTION
+      ? PRETRAINING * p / INTRO_FRACTION
+      : p < UNIFIED_RL_FRACTION
+        ? PRETRAINING * Math.pow(UNIFIED_RL_START / PRETRAINING,
+          (p - INTRO_FRACTION) / (UNIFIED_RL_FRACTION - INTRO_FRACTION))
+        : p < STAGED_RL_FRACTION
+          ? UNIFIED_RL_START * Math.pow(STAGED_RL_START / UNIFIED_RL_START,
+            (p - UNIFIED_RL_FRACTION) / (STAGED_RL_FRACTION - UNIFIED_RL_FRACTION))
+          : STAGED_RL_START * Math.pow(MAX_COMPUTE / STAGED_RL_START,
+            (p - STAGED_RL_FRACTION) / (1 - STAGED_RL_FRACTION));
+    const plotFraction = compute <= PRETRAINING ? 0 : logFraction(compute, PRETRAINING, MAX_COMPUTE);
+    const mixtureX = compute < PRETRAINING
+      ? FIRST_STAGE_END * compute / PRETRAINING
+      : compute < UNIFIED_RL_START
+        ? FIRST_STAGE_END + (UNIFIED_RL_X - FIRST_STAGE_END)
+          * logFraction(compute, PRETRAINING, UNIFIED_RL_START)
+        : compute < STAGED_RL_START
+          ? UNIFIED_RL_X + (2 * FIRST_STAGE_END - UNIFIED_RL_X)
+            * logFraction(compute, UNIFIED_RL_START, STAGED_RL_START)
+          : FIRST_STAGE_END * (2 + logFraction(compute, STAGED_RL_START, MAX_COMPUTE));
+    return { compute, plotX: PLOT.left + plotFraction * (PLOT.end - PLOT.left), mixtureX };
+  }
+
   function render(value) {
     progress = Math.max(0, Math.min(1, value));
-    const postPretraining = Math.max(0, (progress - INTRO_FRACTION) / (1 - INTRO_FRACTION));
-    // The displayed performance axis is logarithmic, exactly as in the paper.
-    const compute = progress < INTRO_FRACTION
-      ? PRETRAINING * progress / INTRO_FRACTION
-      : PRETRAINING * Math.pow(MAX_COMPUTE / PRETRAINING, postPretraining);
-    const plotX = PLOT.left + postPretraining * (PLOT.end - PLOT.left);
+    const { compute, plotX, mixtureX } = timing(progress);
     revealRect.setAttribute('width', progress === 1 ? 222.23622 : plotX);
     plotCursor.setAttribute('x1', plotX);
     plotCursor.setAttribute('x2', plotX);
     plotCursor.setAttribute('visibility', progress >= INTRO_FRACTION && progress < 1 ? 'visible' : 'hidden');
-    // The left schedules are explanatory, rather than a fitted experimental trajectory.
-    const mixtureX = progress < INTRO_FRACTION
-      ? FIRST_STAGE_END * progress / INTRO_FRACTION
-      : FIRST_STAGE_END + (400 - FIRST_STAGE_END) * postPretraining;
     mixtureClip.setAttribute('width', mixtureX);
     mixtureCursor.setAttribute('x1', mixtureX);
     mixtureCursor.setAttribute('x2', mixtureX);
@@ -56,11 +85,13 @@
     slider.setAttribute('aria-valuetext', `${Math.round(progress * 100)} percent; cumulative compute ${(compute / 1e19).toFixed(2)} times ten to the nineteenth FLOPs`);
     phaseLabel.textContent = progress < INTRO_FRACTION
       ? 'Pretraining (shown at accelerated speed)'
-      : progress < INTRO_FRACTION + (1 - INTRO_FRACTION) * .5
+      : compute < UNIFIED_RL_START
         ? 'Staged: midtraining · Unified: pretraining and midtraining data'
-        : progress < 1
-          ? 'Staged: RL · Unified: midtraining data and RL generations'
-          : 'The full compute range shown in Figure 1';
+        : compute < STAGED_RL_START
+          ? 'Staged: midtraining · Unified: RL with midtraining data'
+          : progress < 1
+            ? 'Staged: RL · Unified: RL with midtraining data'
+            : 'The full compute range shown in Figure 1';
   }
 
   function setPlaying(next) {
