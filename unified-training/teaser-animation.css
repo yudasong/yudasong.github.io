@@ -1,7 +1,7 @@
 .training-animation {
   container-type: inline-size;
   width: min(100%, max(600px, 85%));
-  max-width: 720px;
+  max-width: 620px;
   margin: 24px auto 28px;
   --training-pretraining: #dce4ed;
   --training-midtraining: #f0b66e;
@@ -10,9 +10,12 @@
 }
 .training-animation-panels {
   display: grid;
+  width: 100%;
+  max-width: 540px;
+  margin-inline: auto;
   grid-template-columns: minmax(0, .95fr) minmax(0, 1.15fr);
   align-items: start;
-  gap: 20px;
+  gap: 14px;
 }
 .training-animation .training-panel-heading {
   margin: 0 0 15px;
@@ -53,10 +56,12 @@
 .training-data-legend i { display: inline-block; width: 12px; height: 9px; border: 1px solid rgb(0 0 0 / 12%); }
 .training-animation-controls {
   display: flex;
+  max-width: 540px;
+  margin-inline: auto;
   align-items: center;
   gap: 10px;
-  margin-top: 20px;
-  padding-top: 15px;
+  margin-top: 14px;
+  padding-top: 10px;
   border-top: 1px solid var(--line, #dedede);
   font: 12px/1.4 var(--sans, sans-serif);
 }
@@ -80,7 +85,7 @@
 .training-progress-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .training-animation .training-animation-phase { min-height: 18px; margin: 8px 0 0; font: 11px/1.5 var(--sans, sans-serif); color: #68717a; text-align: center; }
 .training-animation figcaption { margin-top: 12px; }
-@container (max-width: 575px) {
+@container (max-width: 500px) {
   .training-animation-panels { grid-template-columns: 1fr; gap: 25px; }
   .training-mixtures { width: min(440px, 100%); margin-inline: auto; }
   .training-performance { width: min(510px, 100%); margin-inline: auto; }
