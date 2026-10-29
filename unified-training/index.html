@@ -31,7 +31,7 @@
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20261029-ut">
-    <link rel="stylesheet" href="style.css?v=20261028f">
+    <link rel="stylesheet" href="style.css?v=20261029-blue">
     <link rel="stylesheet" href="teaser-animation.css?v=20261028c">
   </head>
   <!-- #endregion -->
@@ -107,9 +107,9 @@
                 >
                   <title id="training-mixtures-title">Staged and unified data schedules</title>
                   <desc id="training-mixtures-description">
-                    Staged training uses pretraining, midtraining, and reinforcement learning data in successive phases.
-                    Unified training mixes midtraining data with pretraining data and later with RL generations.
-                    The proportions and phase lengths are schematic.
+                    Staged training uses pretraining, midtraining, and reinforcement learning data in separate phases.
+                    Unified training enables a mixture of pretraining, midtraining and RL generations to be used simultaneously.
+                    The proportions and phase lengths are schematic for presentation purposes.
                   </desc>
                   <defs>
                     <clipPath id="training-mixture-reveal">
@@ -206,7 +206,7 @@
               evolve.
               The left panel illustrates these schedules, with schematic proportions and timing.
               The right panel reports the best observed accuracy (pass@1, solid) and coverage (pass@16, dashed) within
-              each total compute budget across the tested unified and staged configurations.
+              each total compute budget across a sweep of unified and staged configurations.
               Compute includes pretraining, midtraining, and RL; the initial pretraining period is compressed in the
               animation.
             </figcaption>
@@ -223,18 +223,20 @@
             as separate learning problems.
             We argue that this algorithmic separation is not fundamental.
             <strong>Unified training</strong> places pretraining, midtraining, SFT, and suitable RL updates under a
-            common maximum-likelihood formulation, allowing static data and model-generated targets to be combined
+            common maximum-likelihood formulation, allowing static data and model-generated data to be combined
             throughout training.
           </p>
           <p>
-            With a common training rule, the central design choices become which data to use, in what proportions, and
+            With a common training objective, the central design choices become which data to use, in what proportions, and
             when.
             Conventional staged training is one choice of this schedule.
-            We study a broader set of mixtures across the full pretraining–midtraining–RL pipeline, evaluating their
-            effects on accuracy, coverage, retention, and subsequent learning.
-            The experiments show why these decisions should be assessed jointly: a configuration that performs best
-            immediately after midtraining need not produce the best model after RL, and lower accuracy on a task need
-            not imply a worse starting point for learning that task.
+            We study unified training across the full pretraining–midtraining–RL pipeline, evaluating 
+            the effect of different data designs on accuracy, coverage, forgetting, and continual learning.
+            We hope the unified training approach will be useful in the following two ways:
+            <ol>
+              <li>It allows a single and scalable infrastructure for the full training pipeline.</li>
+              <li>It enables a holistic framework for advancing the science of foundation model training.</li>
+            </ol>
           </p>
         </div>
         <!-- #endregion -->
@@ -245,18 +247,17 @@
           <p>
             Pretraining, midtraining, and SFT already share a maximum-likelihood objective.
             Incorporating RL requires identifying the target distribution associated with its update.
-            We build on <a href="https://icml.cc/virtual/2026/poster/65332">Maximum Likelihood Reinforcement Learning
+            We build on <a href="https://zanette-labs.github.io/MaxRL/">Maximum Likelihood Reinforcement Learning
             (MaxRL)</a>, which maximizes the expected log-probability of success under binary rewards.
             The original MaxRL result shows that its population update is equivalent to maximum-likelihood fitting to
-            the current policy’s success-conditioned distribution, held fixed during the update.
-            MaxRL therefore admits the same likelihood-fitting form, with a target constructed from rewarded
-            generations.
+            the current policy’s success-conditioned distribution.
+            MaxRL therefore admits the same likelihood-fitting form, with a target constructed from the current policy’s success-conditioned distribution.
           </p>
           <p>
-            Our contribution is to extend this construction to arbitrary fixed generation policies and combine the
+            We extend this construction to arbitrary generation policies. This allows us to combine the
             resulting targets with static data in a single likelihood objective.
             Each source supplies a distribution over prompt–completion pairs; sampling from their mixture and applying
-            the likelihood loss optimizes the corresponding weighted sum of source objectives.
+            the likelihood loss optimizes the corresponding a weighted distribution over the mixture of data sources.
             The source distributions and mixture weights can evolve throughout training.
             Conventional staged training is the special case that places all mixture weight on one source at a time,
             while unified training allows the sources to overlap.
@@ -270,31 +271,24 @@
             >
             <figcaption>
               <strong>Unified training.</strong>
-              Static corpora, demonstrations, and targets constructed from rewarded generations define the training
+              Static corpora, demonstrations, and RL generations define the training
               mixture.
-              A common maximum-likelihood trainer fits this mixture; the updated model supplies new RL generations.
+              A common maximum-likelihood trainer fits this mixture. The updated model supplies new RL generations.
+              Since we allow arbitrary generation policies, the generation policy need not be identical to the model currently being optimized.
             </figcaption>
           </figure>
           <p>
-            The generation policy need not be identical to the model currently being optimized.
-            For a fixed generator, the trainer fits that generator’s success-conditioned distribution.
-            This recovers on-policy MaxRL when the generator is the current model; otherwise, it generally differs from
-            the current model’s MaxRL gradient.
-            The likelihood interpretation is retained in either case, allowing generation and optimization to proceed
-            independently.
           </p>
           <p>
             The framework also accommodates other suitable RL objectives and continuous rewards through different
             targets and prompt weights.
             For example, binary-reward REINFORCE fits the same success-conditioned target as MaxRL but gives greater
-            weight to prompts with higher success probability.
-            The paper derives these extensions, including continuous-reward REINFORCE and TailRL.
-            The common likelihood formulation applies to this family of updates; generation and reward evaluation remain
-            responsible for constructing the RL training distribution.
+            weight to prompts with higher success probability. 
+            And <a href="https://zanette-labs.github.io/TailRL-website/">TailRL</a> is the continuous reward analogue of MaxRL under the same framework.
           </p>
           <h3>A shared data format, loss, and trainer</h3>
           <p>
-            We represent every example as a token sequence with nonnegative weights and train on all sources with the
+            In practice, we represent every example as a token sequence with nonnegative weights and train on all sources with the
             same weighted cross-entropy loss.
           </p>
           <figure id="fig-token-weights" class="token-weights-figure">
@@ -316,28 +310,25 @@
             no successful sample contribute no gradient.
             The trainer sums weighted token losses and normalizes by the total number of non-prompt tokens in the batch.
             The relative contributions of static and generated data consequently depend on the realized token mixture,
-            rather than a fixed coefficient between separately normalized source losses.
+            rather than a fixed coefficient between separately normalized source losses (we run an ablation on a variant of this approach in the paper).
           </p>
           <p>
-            A shared buffer connects generators and the trainer.
+            A data buffer connects generators and the trainer.
             Generators append evaluated responses using a recent copy of the model, while the trainer samples static
             data and RL generations from the buffer, updates the model, and periodically publishes its weights.
-            Generation and optimization run asynchronously.
-            Changing the training regime then amounts to changing the data supplied to this common system and how its
-            mixture evolves.
+            Generation and training run asynchronously.
           </p>
           <aside class="takeaway" id="takeaway-one-rule" aria-label="Section summary">
             <p>
-              Static data and suitable RL updates can share one likelihood objective and trainer, making staged training
-              a particular schedule within a broader family of data mixtures.
+              Static data and suitable RL updates can share one likelihood objective, which gives us a unified training framework.
             </p>
           </aside>
         </section>
         <!-- #endregion -->
 
-        <!-- #region 2. Midtraining across the full training pipeline -->
+        <!-- #region 2. Unified training across the full training pipeline -->
         <section id="same-data">
-          <h2><span class="section-number">2.</span> Midtraining across the full training pipeline</h2>
+          <h2><span class="section-number">2.</span> Unified training across the full training pipeline</h2>
           <p>
             We first study the full training pipeline in a controlled setting.
             We train a 124M-parameter model from scratch with a fixed 20B-token pretraining stream and a fixed
@@ -353,8 +344,7 @@
             RL.
             We vary the amount of midtraining data used in both parts of the pipeline while preserving the pretraining
             stream.
-            Increasing the midtraining budget reuses the same corpus, so the comparison studies data reuse rather than
-            access to additional examples.
+            Increasing the midtraining budget eventually reuses the same corpus, so the comparison also studies data reuse.
           </p>
           <p>
             The evaluations distinguish task performance from generalization:
@@ -392,7 +382,7 @@
               fixed corpus during RL.
               Results average pass@1 over two RL seeds after 6000 updates in Base and 12000 in Extended.
               Dashed lines show the staged configuration selected for final accuracy on each RL task.
-              Extended generalization uses the same models as Extended, without further selection.
+              Extended generalization uses the same models as Extended.
             </figcaption>
           </figure>
           <ul>
@@ -416,9 +406,8 @@
           </ul>
           <p>
             The value of repeated midtraining data depends on how it is incorporated into the training pipeline.
-            The mixtures used during pretraining and RL interact, and the preferred allocation depends on whether we
-            prioritize task performance or generalization.
-            This comparison matches RL updates and generation budgets within each setting; it does not yet match total
+            The mixtures used during pretraining and RL interact, and sometimes there is a trade-off between task performance and generalization.
+            Note that this comparison matches RL updates and generation budgets within each setting; it does not yet match total
             training compute.
           </p>
           <aside class="takeaway" id="takeaway-same-data" aria-label="Section summary">
@@ -432,7 +421,7 @@
 
         <!-- #region 3. Accuracy and coverage under a total compute budget -->
         <section id="compute">
-          <h2><span class="section-number">3.</span> Accuracy and coverage under a total compute budget</h2>
+          <h2><span class="section-number">3.</span>Compute-matched comparison</h2>
           <p>
             Different data mixtures require different amounts of compute, even with the same number of RL updates.
             We therefore compare accuracy and coverage within a common total training budget.
@@ -447,7 +436,7 @@
             <li>
               <strong>Training trajectories.</strong>
               Each curve follows one configuration through RL.
-              We include all six staged variants, spanning three midtraining budgets and two learning rates, because the
+              We include a sweep of six staged training variants, spanning three midtraining budgets and two learning rates, because the
               best final configuration need not be best at an earlier budget.
             </li>
             <li>
@@ -478,7 +467,7 @@
             </figcaption>
           </figure>
           <p>
-            The preferred allocation changes with the available budget.
+            The compute-optimal configuration changes with the available budget.
             Staged training contributes to the frontier at intermediate budgets, particularly for accuracy on the
             primary RL tasks.
             Unified training reaches higher accuracy and coverage at larger budgets.
@@ -486,20 +475,20 @@
             all of the observed frontier for both metrics.
           </p>
           <p>
-            The improvements therefore persist after accounting for the additional training work.
+            The benefit of unified training therefore persists after accounting for the compute.
             Mixing changes which allocations of data and compute are effective: more reuse of the midtraining corpus can
             remain useful when it accompanies pretraining and RL, even when additional staged midtraining reduces final
             performance.
-            These frontiers characterize the configurations tested, rather than a global optimum or a predictive scaling
+            These frontiers characterize the configurations tested, but they are not a global optimum or a predictive scaling
             law.
             They nevertheless show that restricting the search to sequential stages can exclude better allocations
             within the same compute budget.
           </p>
           <aside class="takeaway" id="takeaway-compute" aria-label="Section summary">
             <p>
-              The gains persist after accounting for total training compute.
-              Staged training remains competitive at intermediate budgets, while unified training achieves higher
-              accuracy and coverage at larger budgets among the configurations tested.
+              The unified training also outperforms staged training under most compute-matched settings.
+              Staged training remains competitive at some intermediate budgets, while unified training achieves higher
+              accuracy and coverage at larger budgets.
             </p>
           </aside>
         </section>
@@ -507,14 +496,12 @@
 
         <!-- #region 4. Retention of pretrained capabilities -->
         <section id="retention">
-          <h2><span class="section-number">4.</span> Retention of pretrained capabilities</h2>
+          <h2><span class="section-number">4.</span> Retention of pretraining capabilities</h2>
           <p>
             We next examine whether learning from the reasoning corpus preserves capabilities acquired during
             pretraining.
             Before RL, we evaluate held-out pretraining loss and mean benchmark score across five general benchmarks.
-            For this comparison, the staged reference is selected specifically for retention: among all six staged
-            configurations, it has both the lowest held-out loss and the highest mean benchmark score.
-            This avoids assessing forgetting only against the configuration selected for reasoning accuracy.
+            The analysis on forgetting after RL is presented in the subsequent section.
           </p>
           <figure id="fig-retention" class="paper-figure retention-figure">
             <div class="figure-content">
@@ -553,7 +540,7 @@
           <aside class="takeaway" id="takeaway-retention" aria-label="Section summary">
             <p>
               Mixing reasoning data during pretraining substantially reduces forgetting compared with staged
-              midtraining, even when the staged configuration is selected for its retention of pretrained capabilities.
+              midtraining, and it produces a better base model for subsequent RL as suggested in the previous sections.
             </p>
           </aside>
         </section>
@@ -568,11 +555,11 @@
             mathematics and capabilities beyond the RL task.
             We use a 0.76B-parameter model trained from scratch through pretraining and midtraining, then run
             mathematical RL on Math12K.
-            An additional 240M-token corpus contains web text, mathematics, code, and reasoning traces.
+            An additional 240M-token corpus contains web text, mathematics, code, and reasoning traces, which is sampled from the same data distribution as the midtraining corpus.
             Staged training uses this corpus before RL; unified training mixes it into RL.
           </p>
           <p>
-            We vary the constant midtraining proportion from zero to 5% while holding the number of mathematical RL
+            We vary the constant midtraining proportion from 0% to 5% while holding the number of mathematical RL
             updates fixed.
             The zero-mixing ablation uses the same asynchronous trainer as the nonzero mixtures, providing a control for
             adding midtraining data with the implementation held fixed.
@@ -604,7 +591,7 @@
               The largest proportions achieve the highest coverage, although the trend is not monotonic.
             </li>
             <li>
-              <strong>Retention.</strong>
+              <strong>Forgetting.</strong>
               Every nonzero mixture reduces held-out corpus loss below the base-model value, larger mixtures reduce it
               further, and SciQ accuracy generally improves.
               Staged training instead increases corpus loss.
@@ -616,14 +603,12 @@
             </li>
           </ul>
           <p>
-            A heterogeneous midtraining corpus can therefore improve retention and coverage without improving
-            single-sample accuracy on every benchmark.
+            A heterogeneous midtraining corpus can therefore mitigate forgetting and improvecoverage but it also has a mixed effect on accuracy.
             The proportion determines a tradeoff among these outcomes; none of the tested mixtures is uniformly best.
           </p>
           <aside class="takeaway" id="takeaway-mixtures" aria-label="Section summary">
             <p>
-              During mathematical RL, mixing midtraining data can improve retention and coverage at the cost of coding
-              accuracy.
+              During mathematical RL, mixing midtraining data can mitigate forgetting and improve coverage at the cost of certain out-of-distribution accuracy.
               The preferred proportion depends on which capabilities we prioritize.
             </p>
           </aside>
@@ -634,8 +619,7 @@
         <section id="schedules">
           <h2><span class="section-number">6.</span> Scheduling midtraining data during RL</h2>
           <p>
-            The proportion sweep keeps each mixture constant throughout RL.
-            We next test whether changing when midtraining data is used can reduce the coding accuracy cost while
+            We also test whether changing when midtraining data is used can reduce the coding accuracy cost while
             preserving the retention benefits.
             We compare constant mixing, linear decay, linear growth, and linear decay to zero halfway through RL.
             All four schedules have the same average configured midtraining proportion of 0.5%.
@@ -674,7 +658,7 @@
           </p>
           <aside class="takeaway" id="takeaway-schedules" aria-label="Section summary">
             <p>
-              Timing changes the tradeoff: ending mixing earlier improves coding and SciQ accuracy, while sustained
+              Data schedule changes the tradeoff: ending mixing earlier improves coding and SciQ accuracy, while sustained
               mixing better preserves fit to the midtraining corpus.
             </p>
           </aside>
@@ -690,7 +674,7 @@
             We continue the staged mathematical model and four unified models trained with constant 0.5%, 1%, 2%, and 5%
             mixtures.
             All use the same coding RL configuration without midtraining data.
-            The comparison tests how the preceding training affects subsequent learning, with the continuation procedure
+            The comparison tests how the preceding training affects subsequent learning, with this continual learning procedure
             held fixed.
           </p>
           <figure id="fig-coding" class="paper-figure">
@@ -717,55 +701,43 @@
             depends on the initialization.
           </p>
           <p>
-            A separate continuation on general reasoning questions from WebInstruct shows the same reversal in accuracy:
-            both tested unified initializations, at 2% and 5%, begin below staged training and finish above it.
-            These runs branch directly from the mathematical checkpoints.
-            The paper reports this setting and additional evaluations of mathematics and general knowledge alongside the
-            coding continuation.
+            In the paper, we also have a separate continuation on general reasoning questions from WebInstruct, which shows the same reversal in accuracy.
           </p>
           <p>
-            The controlled experiment shows a related effect: the staged model has higher Base accuracy before RL than
+            We also have another results on the controlled experiment with reasoning puzzle that shows a related effect: the staged model has higher Base accuracy before RL than
             any unified initialization, yet the best unified models outperform it after RL.
-            Together, these results show that immediate benchmark accuracy can rank training procedures differently from
-            performance after subsequent learning.
-            Unified training can provide a better starting point for continual learning even when its initial accuracy
-            on the new task is lower.
           </p>
+          <p>
           <aside class="takeaway" id="takeaway-next-task" aria-label="Section summary">
             <p>
-              Lower accuracy before adaptation need not imply a worse initialization: unified mathematical training
-              leads to higher final coding accuracy under the same subsequent RL procedure.
+              Lower accuracy before continual learning need not imply a worse initialization: unified trained checkpoints
+              lead to higher final accuracy and coverage on the continual learning tasks, under the same subsequent RL procedure than the staged trained model.
             </p>
           </aside>
         </section>
         <!-- #endregion -->
-        <p>
-          The paper also includes analyses of loss normalization, MaxRL versus REINFORCE, and KL regularization as an
-          alternative to mixing midtraining data.
-        </p>
 
         <!-- #region 8. Future directions -->
         <section id="looking-ahead">
           <h2><span class="section-number">8.</span> Future directions</h2>
           <p>
-            <strong>Understanding the full training pipeline.</strong>
-            A primary goal is to develop a scientific understanding of foundation-model training as a whole: how data
+            We have a lot of more fun results in the paper, and I hope you will be interested to check them out as well!
+            We think the primary goal is to develop a scientific understanding of foundation-model training as a whole: how data
             composition, timing, and compute allocation jointly determine the capabilities of the final model.
             Unified training provides a common formulation and system in which these decisions can be studied together.
             Several challenges remain before this view can yield predictive principles.
           </p>
           <p>
             <strong>Predicting across scales and budgets.</strong>
-            Our results establish trends for the configurations studied, but do not predict how they change with model
+            Our results establish trends for the configurations that we studied, but do not predict how they change with model
             size or training budget.
-            This requires systematic studies of complete training trajectories, accounting for the costs of both reusing
-            static data and generating new responses.
+            This requires systematic studies of such as scaling laws. 
           </p>
           <p>
             <strong>Data and optimization.</strong>
             The effect of a data schedule can depend on the optimization schedule used with it.
             Controlled experiments need to distinguish these effects and characterize their interactions, including how
-            learning rates and other optimization choices should respond as the training distribution evolves.
+            optimization choices should respond as the training distribution evolves.
           </p>
           <p>
             <strong>Interactions among tasks.</strong>
@@ -775,10 +747,10 @@
             tasks, especially when the model itself generates part of the training data.
           </p>
           <p>
-            <strong>Retention and subsequent learning.</strong>
+            <strong>Retention and continual learning.</strong>
             The value of a training decision may only become apparent after further learning, as our continual-learning
             results illustrate.
-            Longer task sequences are needed to understand how earlier mixtures affect both retention and adaptation,
+            Longer task sequences are needed to understand how earlier mixtures affect both forgetting and adaptation,
             and to identify measures that predict a model’s ability to learn from future data.
           </p>
         </section>
