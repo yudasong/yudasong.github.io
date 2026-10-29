@@ -37,6 +37,14 @@ sup { font-size: .65em; line-height: 0; vertical-align: super; margin-left: 2px;
 .resources span { color: #999; }
 .opening { margin: 28px 0 0; }
 p { margin: 0 0 18px; }
+@media (min-width: 761px) {
+  .opening > p, article > section > p {
+    text-align: justify;
+    text-align-last: left;
+    hyphens: none;
+  }
+}
+article .tex-linebreak-active { text-align: left; hyphens: none; }
 article ul, article ol { margin: 0 0 22px; padding-left: 1.25em; }
 article ol { padding-left: 1.5em; }
 article li { margin: 0 0 9px; padding-left: .2em; }

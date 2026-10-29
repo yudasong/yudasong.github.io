@@ -31,7 +31,7 @@
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20261029-ut">
-    <link rel="stylesheet" href="style.css?v=20261029-diagrams">
+    <link rel="stylesheet" href="style.css?v=20261029-tex-full-article">
     <link rel="stylesheet" href="teaser-animation.css?v=20261029-restored">
   </head>
   <!-- #endregion -->
@@ -215,7 +215,7 @@
         <!-- #endregion -->
 
         <!-- #region Opening paragraphs -->
-        <div class="opening">
+        <div class="opening" id="opening">
           <p>
             Foundation models are conventionally trained through a sequence of stages: pretraining, midtraining,
             supervised fine-tuning (SFT), and reinforcement learning (RL).
@@ -320,7 +320,7 @@
           </p>
           <aside class="takeaway" id="takeaway-one-rule" aria-label="Section summary">
             <p>
-              Static data and suitable RL updates can share one likelihood objective, which gives us a unified training framework.
+              Static data and suitable RL updates can share one likelihood objective, which gives us a unified framework for the whole foundation model training pipeline.
             </p>
           </aside>
         </section>
@@ -770,6 +770,9 @@
     </main>
 
     <!-- #region Page scripts -->
+    <script src="assets/vendor/tex-linebreak/lib.js" defer></script>
+    <script src="assets/vendor/tex-linebreak/hyphens_en-us.js" defer></script>
+    <script src="typography.js?v=20261029-full-article" defer></script>
     <script src="site.js" defer></script>
     <script src="teaser-animation.js?v=20261028b" defer></script>
     <!-- #endregion -->
