@@ -1,0 +1,67 @@
+[
+  {
+    "file": "reasoning_data_reuse.pdf",
+    "source": "arxiv-submission/figures/reasoning_data_reuse.pdf",
+    "sha256": "60b3eb7063a8d6ae5a157112fd31ef7c214bf5156f63953cd705ee6045b20129",
+    "display": "reasoning_data_reuse.svg",
+    "conversion": "pdftocairo SVG; original geometry, labels, and data unchanged"
+  },
+  {
+    "file": "reasoning_compute.pdf",
+    "source": "arxiv-submission/figures/reasoning_compute.pdf",
+    "sha256": "bd217f87e15181a64f80d4541baaae3d25c6ace6f3e324217b91fcfdfa583ea6",
+    "display": "reasoning_compute.svg",
+    "conversion": "pdftocairo SVG; original geometry, labels, and data unchanged"
+  },
+  {
+    "file": "reasoning_pretraining_retention.pdf",
+    "source": "arxiv-submission/figures/reasoning_pretraining_retention.pdf",
+    "sha256": "2613acead68f77f7f4e1030c26943dd26224946305b8d59fbd8a41ccfae5a250",
+    "display": "reasoning_pretraining_retention.svg",
+    "conversion": "pdftocairo SVG; original geometry, labels, and data unchanged"
+  },
+  {
+    "file": "real_mixing.pdf",
+    "source": "arxiv-submission/figures/real_mixing.pdf",
+    "sha256": "39e1a954890a09da5fa179a0f91353ed6e2d68c59d5874584b83a12bb3dac43e",
+    "display": "real_mixing.svg",
+    "conversion": "pdftocairo SVG; original geometry, labels, and data unchanged"
+  },
+  {
+    "file": "real_schedules.pdf",
+    "source": "arxiv-submission/figures/real_schedules.pdf",
+    "sha256": "9d7e3bcd3df8dbaf86fc6cf1ecb3878e7c9dc9e4c7f1580afd81695edde98f01",
+    "display": "real_schedules.svg",
+    "conversion": "pdftocairo SVG; original geometry, labels, and data unchanged"
+  },
+  {
+    "file": "real_continual.pdf",
+    "source": "arxiv-submission/figures/real_continual.pdf",
+    "sha256": "95148ebfebe1a8adfc9f5dc5c776a0211cdfa220ed41d2704e5abf98dbe721e4",
+    "display": "real_continual.svg",
+    "conversion": "pdftocairo SVG; original geometry, labels, and data unchanged"
+  },
+  {
+    "file": "training_framework.svg",
+    "source": "assets/paper.pdf page 2, Figure 1 left panel",
+    "crop_points": [
+      72,
+      77,
+      218,
+      115
+    ],
+    "conversion": "pdftocairo SVG, with viewBox selecting the original conceptual panel"
+  },
+  {
+    "file": "token_weights.svg",
+    "source": "assets/paper.pdf page 5, Figure 2 right panel",
+    "source_sha256": "7e21bd93783dfafda1a4ea9ce7b60e8bf34878c7240ede3fd93b9895f25e82ce",
+    "crop_points": [
+      362,
+      77,
+      154,
+      67
+    ],
+    "conversion": "pdftocairo SVG, with viewBox selecting the original token-weight panel; geometry, labels, and colors unchanged"
+  }
+]

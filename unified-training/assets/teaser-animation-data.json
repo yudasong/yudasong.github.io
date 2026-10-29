@@ -1,0 +1,13 @@
+{
+  "source": "arxiv-submission/figures/teaser_reasoning.pdf",
+  "source_sha256": "882eee52c84ce54a9050c4460f1d63cbc0c3f4ff499b2ec7bf7e1f8a5395e534",
+  "conversion": "pdftocairo -svg; complete original plot preserved; runtime clipping reveals four original curve paths",
+  "setting": "Extended",
+  "axis_minimum": 14830489990487605248,
+  "compute_cap": 2.1533828137184055e+19,
+  "staged_configurations": 6,
+  "unified_configurations": 22,
+  "semantics": "Best observed checkpoint at or below compute budget, separately for each method family and metric. Step curves, no performance interpolation. Left schedules are schematic and not a single run underlying these envelopes.",
+  "shared_pretraining_animation_fraction": 0.12,
+  "duration_ms": 10000
+}
