@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Editing map: Header → Contents navigation → Overview animation → Opening → Sections 1–8 → Footer.
+  Editing map: Header → Contents navigation → Overview animation → Opening → Sections 1–8 → BibTeX → Footer.
   Article prose and captions are below in short lines; inline tags stay with the words they style.
   In VS Code, fold the #region groups to navigate. Keep section IDs and figure paths intact.
   The overview animation is also in teaser-animation.html; update both copies together.
@@ -31,7 +31,7 @@
       }
     </script>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20261029-ut">
-    <link rel="stylesheet" href="style.css?v=20261029-tex-full-article">
+    <link rel="stylesheet" href="style.css?v=20261029-bibtex">
     <link rel="stylesheet" href="teaser-animation.css?v=20261029-restored">
   </head>
   <!-- #endregion -->
@@ -67,7 +67,7 @@
           </p>
         </div>
         <nav class="resources" aria-label="Project resources">
-          <a href="assets/paper.pdf">Paper</a>
+          <a href="https://arxiv.org/abs/2610.40564">Paper</a>
           <span aria-hidden="true">·</span>
           <a href="https://github.com/yudasong/unified-training">Code</a>
           <span aria-hidden="true">·</span>
@@ -87,6 +87,7 @@
         <a href="#schedules">Schedules</a>
         <a href="#next-task">Continual learning</a>
         <a href="#looking-ahead">Future directions</a>
+        <a href="#bibtex">BibTeX</a>
       </nav>
       <!-- #endregion -->
       <article id="article">
@@ -230,7 +231,7 @@
             With a common training objective, the central design choices become which data to use, in what proportions, and
             when.
             Conventional staged training is one choice of this schedule.
-            We study unified training across the full pretraining–midtraining–RL pipeline, evaluating 
+            We study unified training across the full pretraining–midtraining–RL pipeline, evaluating
             the effect of different data designs on accuracy, coverage, forgetting, and continual learning.
             We hope the unified training approach will be useful in the following two ways:
           </p>
@@ -283,7 +284,7 @@
             The framework also accommodates other suitable RL objectives and continuous rewards through different
             targets and prompt weights.
             For example, binary-reward REINFORCE fits the same success-conditioned target as MaxRL but gives greater
-            weight to prompts with higher success probability. 
+            weight to prompts with higher success probability.
             And <a href="https://zanette-labs.github.io/TailRL-website/">TailRL</a> is the continuous reward analogue of MaxRL under the same framework.
           </p>
           <h3>A shared data format, loss, and trainer</h3>
@@ -731,7 +732,7 @@
             <strong>Predicting across scales and budgets.</strong>
             Our results establish trends for the configurations that we studied, but do not predict how they change with model
             size or training budget.
-            This requires systematic studies of such as scaling laws. 
+            This requires systematic studies of such as scaling laws.
           </p>
           <p>
             <strong>Data and optimization.</strong>
@@ -755,12 +756,30 @@
           </p>
         </section>
         <!-- #endregion -->
+
+        <!-- #region BibTeX: official arXiv export; keep in sync with assets/citation.bib -->
+        <section id="bibtex" class="citation" aria-labelledby="bibtex-title">
+          <div class="citation-heading">
+            <h2 id="bibtex-title">BibTeX</h2>
+            <a href="assets/citation.bib" download>Download .bib</a>
+          </div>
+          <pre><code>@misc{song2026trainingfoundationmodelssingle,
+      title={Training Foundation Models with a Single Algorithm},
+      author={Yuda Song and Alvin Zhang and Fahim Tajwar and Daman Arora and Jeff Schneider and Daniel Khashabi and Ruslan Salakhutdinov and J. Andrew Bagnell and Aarti Singh and Andrea Zanette},
+      year={2026},
+      eprint={2610.40564},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2610.40564},
+}</code></pre>
+        </section>
+        <!-- #endregion -->
       </article>
 
       <!-- #region Footer links -->
       <footer>
         <p>
-          Full results and methods: <a href="assets/paper.pdf">Paper</a> ·
+          Full results and methods: <a href="https://arxiv.org/abs/2610.40564">Paper</a> ·
           <a href="https://github.com/yudasong/unified-training">Code</a> ·
           <a href="https://huggingface.co/sfanm/unified-training">Models</a>
         </p>
