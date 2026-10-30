@@ -1,0 +1,98 @@
+.training-animation {
+  container-type: inline-size;
+  width: min(100%, max(600px, 85%));
+  max-width: 720px;
+  margin: 24px auto 28px;
+  --training-pretraining: #dce4ed;
+  --training-midtraining: #f0b66e;
+  --training-rl: #2a78d6;
+  --training-staged: #777;
+}
+.training-animation-panels {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: 20px;
+}
+.training-animation .training-panel-heading {
+  margin: 0 0 15px;
+  color: var(--ink, #252525);
+  font: 600 14px/1.4 var(--sans, sans-serif);
+  text-align: center;
+}
+.training-mixture-svg, .training-performance-chart > svg,
+.training-performance-chart > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.training-mixture-svg { font-family: var(--sans, sans-serif); }
+.training-method { font-size: 17px; font-weight: 600; }
+.training-method.staged { fill: var(--training-staged); }
+.training-method.unified { fill: var(--training-rl); }
+.training-future { fill: #f5f6f7; }
+.training-animation .data-pretraining { fill: var(--training-pretraining); background: var(--training-pretraining); }
+.training-animation .data-midtraining { fill: var(--training-midtraining); background: var(--training-midtraining); }
+.training-animation .data-rl { fill: var(--training-rl); background: var(--training-rl); }
+.training-band-labels { text-anchor: middle; font-size: 12px; fill: #2d3a47; }
+.training-band-labels .on-blue { fill: white; }
+.training-band-outlines { fill: none; stroke: #aeb8c3; stroke-width: .65; }
+.training-mixture-cursor { stroke: #252525; stroke-width: 1.4; stroke-dasharray: 3 3; }
+.training-schematic-label { font-size: 11px; fill: #68717a; }
+.training-data-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 12px;
+  margin-top: 12px;
+  font: 11px/1.4 var(--sans, sans-serif);
+  color: #4f5963;
+}
+.training-data-legend > span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+.training-data-legend i { display: inline-block; width: 12px; height: 9px; border: 1px solid rgb(0 0 0 / 12%); }
+.training-animation-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line, #dedede);
+  font: 12px/1.4 var(--sans, sans-serif);
+}
+.training-animation-controls[hidden], .training-animation-phase[hidden] { display: none; }
+.training-animation-controls button {
+  appearance: none;
+  border: 1px solid #c7ccd1;
+  background: #fff;
+  border-radius: 3px;
+  color: #303840;
+  padding: 6px 9px;
+  font: inherit;
+  cursor: pointer;
+  min-width: 52px;
+}
+.training-animation-controls button:hover { background: #f5f7f9; border-color: #9faab5; }
+.training-animation-controls button:focus-visible,
+.training-animation-controls input:focus-visible { outline: 2px solid #2a78d6; outline-offset: 3px; }
+.training-animation-controls input { flex: 1; min-width: 35px; width: 100%; margin: 0; accent-color: #2a78d6; cursor: pointer; }
+.training-animation-controls output { min-width: 133px; white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; }
+.training-progress-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.training-animation .training-animation-phase { min-height: 18px; margin: 8px 0 0; font: 11px/1.5 var(--sans, sans-serif); color: #68717a; text-align: center; }
+.training-animation figcaption { margin-top: 12px; }
+@container (max-width: 575px) {
+  .training-animation-panels { grid-template-columns: 1fr; gap: 25px; }
+  .training-mixtures { width: min(440px, 100%); margin-inline: auto; }
+  .training-performance { width: min(510px, 100%); margin-inline: auto; }
+  .training-animation .training-panel-heading { margin-bottom: 12px; }
+}
+@container (max-width: 440px) {
+  .training-animation-controls { gap: 7px; flex-wrap: wrap; }
+  .training-animation-controls input { flex-basis: calc(100% - 120px); }
+  .training-animation-controls output { width: 100%; text-align: center; }
+  .training-animation-controls button { min-width: 48px; padding: 6px 7px; }
+}
+@media print {
+  .training-animation-controls, .training-animation-phase { display: none !important; }
+  .training-animation-panels { grid-template-columns: .9fr 1.15fr; }
+}
