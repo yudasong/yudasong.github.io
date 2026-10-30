@@ -21,10 +21,10 @@
     leftmin: 3,
     rightmin: 3,
   });
-  function conservativeHyphenation(word) {
+  function conservativeHyphenation(word, minimumLength = 9) {
     // Keep short words, abbreviations, and existing compounds intact.
     const match = word.match(/^([a-z]{9,})([.,;:!?]?)$/);
-    if (!match || !hyphenate) return [word];
+    if (!match || match[1].length < minimumLength || !hyphenate) return [word];
     const parts = hyphenate(match[1]);
     parts[parts.length - 1] += match[2];
     return parts;
@@ -33,19 +33,23 @@
   function tooManyHyphenatedLines(p) {
     const range = document.createRange();
     range.selectNodeContents(p);
-    let previousHyphenated = false;
+    const breaks = p.querySelectorAll('br');
+    // Narrow columns have more lines. Allow occasional hyphenation without
+    // forcing long phone paragraphs into widely spaced whole-word layouts.
+    const limit = Math.max(2, Math.ceil((breaks.length + 1) / 5));
+    const consecutiveLimit = p.clientWidth < 400 ? 2 : 1;
+    let consecutive = 0;
     let count = 0;
-    for (const br of p.querySelectorAll('br')) {
+    for (const br of breaks) {
       range.setEndBefore(br);
       const hyphenated = range.toString().trimEnd().endsWith('-');
-      if (hyphenated && (++count > 2 || previousHyphenated)) return true;
-      previousHyphenated = hyphenated;
+      consecutive = hyphenated ? consecutive + 1 : 0;
+      if (hyphenated && (++count > limit || consecutive > consecutiveLimit)) return true;
       range.setStartAfter(br);
     }
     return false;
   }
 
-  const desktop = matchMedia('(min-width: 761px)');
   const originalWhiteSpace = paragraphs.map(p => ({
     value: p.style.getPropertyValue('white-space'),
     priority: p.style.getPropertyPriority('white-space'),
@@ -70,7 +74,7 @@
   function layout() {
     frame = 0;
     lastWidth = article.getBoundingClientRect().width;
-    if (printing || !desktop.matches || lastWidth === 0) {
+    if (printing || lastWidth === 0) {
       restore();
       return;
     }
@@ -80,8 +84,14 @@
       // only if that cannot meet its spacing constraint, and cleans up its
       // previous layout before each recalculation.
       engine.justifyContent(paragraphs, mode === 'nohyphens' ? undefined : conservativeHyphenation);
-      // Prefer whole-word layout if hyphenation becomes visually repetitive.
-      paragraphs.filter(tooManyHyphenatedLines).forEach(p => engine.justifyContent(p));
+      // Try fewer hyphenation candidates before dropping hyphens altogether.
+      // This avoids large word gaps in long paragraphs on narrow screens.
+      if (mode !== 'nohyphens') {
+        paragraphs.filter(tooManyHyphenatedLines).forEach(p => {
+          engine.justifyContent(p, word => conservativeHyphenation(word, 12));
+          if (tooManyHyphenatedLines(p)) engine.justifyContent(p);
+        });
+      }
     } catch (error) {
       restore();
       console.warn('Paragraph typesetting fell back to browser layout.', error);
@@ -102,7 +112,6 @@
       }).observe(article);
     }
     window.addEventListener('resize', schedule);
-    desktop.addEventListener('change', schedule);
     document.fonts?.addEventListener('loadingdone', schedule);
     window.addEventListener('beforeprint', () => {
       printing = true;
